@@ -1,18 +1,18 @@
-const users  = require("../mocked_data/users")
+const users = require("../mocked_data/users");
 
 const getUserByEmail = (userEmail) => {
-    let userFound = users.find(x => x.email == userEmail)
+  let userFound = users.find((x) => x.email === userEmail);
 
-    return userFound
-}
+  return userFound;
+};
 
 const getUserByUsername = (username) => {
-    let userFound = users.find(x => x.name == username)
+  let userFound = users.find((x) => x.name === username);
 
-    return userFound
-}
+  return userFound;
+};
 
 module.exports = {
-    getUserByEmail,
-    getUserByUsername
-}
+  getUserByEmail,
+  getUserByUsername,
+};
