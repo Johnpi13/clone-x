@@ -1,26 +1,13 @@
 const { check, body } = require("express-validator");
+const validate = require('./validation')
 const {
   getUserByEmail,
   getUserByUsername,
 } = require("../services/userService");
 
-const validate = (validations) => {
-  return async (req, res, next) => {
-    for (const validation of validations) {
-      const result = await validation.run(req);
-
-      if (!result.isEmpty()) {
-        return res.status(400).json({ errors: result.array() });
-      }
-    }
-
-    next();
-  };
-};
-
 const registerValidation = validate([
-  check("email", "Email inválido").isEmail(),
-  check("password", "La contraseña debe ser de al menos 8 caracteres").isLength(
+  check("email", "Email inválido").notEmpty().isEmail(),
+  check("password", "La contraseña debe ser de al menos 8 caracteres").notEmpty().isLength(
     { min: 8 }
   ),
 

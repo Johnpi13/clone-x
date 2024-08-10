@@ -1,15 +1,18 @@
+const getTweets = require('../services/tweetService')
+
 const publishTweet = (request, response) => {
-  response.json();
+  response.json({ msg: "Tweet published"});
 };
 
 const listTweets = (request, response) => {
-  response.json();
+  let tweets = getTweets()
+  response.json(tweets);
 };
 const updateTweet = (request, response) => {
-  response.json();
+  response.json({ msg: "Tweet updated"});
 };
 const deleteTweet = (request, response) => {
-  response.json();
+  response.json({ msg: "Tweet deleted"});
 };
 
 module.exports = {
