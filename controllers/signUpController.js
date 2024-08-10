@@ -1,5 +1,5 @@
 const signUpUser = (request, response) => {
-    response.json()
+    response.json({message: "logged in"})
 }
 
 module.exports = {

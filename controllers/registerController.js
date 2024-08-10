@@ -1,5 +1,5 @@
 const registerUser = (request, response) => {
-    response.json()
+    response.json({message: "User registered"})
 }
 
 module.exports = {
