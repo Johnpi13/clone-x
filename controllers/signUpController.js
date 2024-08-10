@@ -1,5 +1,14 @@
+const { validationResult } = require("express-validator");
+
 const signUpUser = (request, response) => {
-    response.json({message: "logged in"})
+    const errors = validationResult(request);
+    if (!errors.isEmpty()) {
+      return;
+    }
+  
+    res.status(200).json({
+      msg: "logged in",
+    });
 }
 
 module.exports = {
