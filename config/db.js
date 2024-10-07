@@ -1,17 +1,20 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient } = require('mongodb');
 
-const getDBInstance = async() => {
-    const client = new MongoClient(process.env.DB_CONNECTION_STRING);
+let client;
+let db;
+
+const getDBInstance = () => {
+  if (!client) {
     try {
-        const database = client.db("clone-x");
-        console.log("connected correctly");
-
-        return database;
-    } finally {
-        await client.close();
+      client = new MongoClient(process.env.DB_CONNECTION_STRING);
+      db = client.db(process.env.DB_NAME);
+      console.log('Connected successfully');
+    } catch (error) {
+      console.error('Something was wrong when connecting:', error);
+      process.exit(1);
     }
-}
-
-module.exports = {
-    getDBInstance,
+  }
+  return db;
 };
+
+module.exports = { getDBInstance };
