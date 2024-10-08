@@ -12,9 +12,19 @@ const getUser = async (params) => {
   try {
     const userCollection = getCollection('users')
 
+    let conditions = []
+    if (!!params.email) {
+      conditions.push({ email: params.email })
+    }
+
+    if (!!params.userName) {
+      conditions.push({ userName: params.userName })
+    }
+
     const user = await userCollection.findOne({
-      $or: [{ email: params.email }, { userName: params.userName }]
+      $or: conditions
     });
+    
     return user;
   }
   catch (err) {

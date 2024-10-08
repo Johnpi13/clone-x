@@ -1,7 +1,7 @@
 const tweets = require('../mocked_data/tweets')
 
 const getTweets = () => {
-    if (tweets){
+    if (tweets) {
         return tweets
     }
 
