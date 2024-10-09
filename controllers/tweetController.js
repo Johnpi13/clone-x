@@ -1,4 +1,5 @@
-const {getTweets} = require('../services/tweetService');
+const Tweet = require('../models/tweetSchema');
+const tweetService = require('../services/tweetService');
 
 const listTweets = (request, response) => {
     const tweets = getTweets();
@@ -6,14 +7,22 @@ const listTweets = (request, response) => {
 };
 
 const publishTweet = (request, response) => {
-    const { body } = request.body;
-    const newTweet = {
-        id: new Date().getTime(),
-        body
-    };
-    const tweets = getTweets();
-    tweets.push(newTweet);
-    response.status(201).json(newTweet);
+    try {
+        const userName = request.user;
+        const { body } = request.body;
+
+        const newTweet = new Tweet(userName, body);
+
+        const result = tweetService.createTweet(newTweet);
+
+        response.status(201).json(result);
+    }
+    catch (err) { 
+        response.status(500).json({
+            success: false,
+            err: err
+        })
+    }
 };
 
 const updateTweet = (request, response) => {

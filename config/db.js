@@ -17,4 +17,11 @@ const getDBInstance = () => {
   return db;
 };
 
-module.exports = { getDBInstance };
+const getCollection = (collectionName) => {
+  const dbInstance = getDBInstance();
+  const userCollection = dbInstance.collection(collectionName)
+
+  return userCollection;
+}
+
+module.exports = { getCollection };

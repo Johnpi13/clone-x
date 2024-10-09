@@ -1,12 +1,5 @@
 const users = require("../mocked_data/users");
-const { getDBInstance } = require('../config/db');
-
-const getCollection = (collectionName) => {
-  const dbInstance = getDBInstance();
-  const userCollection = dbInstance.collection(collectionName)
-
-  return userCollection;
-}
+const { getCollection } = require('../config/db');
 
 const getUser = async (params) => {
   try {
