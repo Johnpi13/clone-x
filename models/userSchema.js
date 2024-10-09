@@ -1,23 +1,14 @@
-const bcrypt = require('bcrypt');
+const mongoose = require('mongoose'); 
 
-class UserSchema {
-    fullName;
-    userName;
-    email;
-    password;
+const UserSchema = new mongoose.Schema({ 
+    fullName: { type: String, required: true },
+    userName: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+});
 
-    constructor(fullName, userName, email, password) {
-        this.fullName = fullName;
-        this.userName = userName;
-        this.email = email;
-        this.password = bcrypt.hashSync(password, parseInt(process.env.SALT_ROUNDS));
-    }
 
-    getUser() {
-        return this;
-    }
-}
-
-module.exports = {
-    UserSchema
-}
+const User = mongoose.model('User', UserSchema); 
+module.exports = User; 

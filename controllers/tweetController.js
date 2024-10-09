@@ -1,26 +1,40 @@
 const Tweet = require('../models/tweetSchema');
 const tweetService = require('../services/tweetService');
 
-const listTweets = (request, response) => {
-    const tweets = getTweets();
-    response.status(200).json(tweets);
+const listTweets = async (request, response) => {
+    try {
+        const userId = request.user.id;
+
+        const tweets = await Tweet.find({ userId: userId });
+
+        response.status(200).json(tweets);
+    } catch (err) {
+        response.status(500).json({ message: 'Error al obtener los tweets', error: err });
+    }
 };
 
-const publishTweet = (request, response) => {
+const publishTweet = async (request, response) => {
     try {
+        console.log("User from request:", request.user);
         const userName = request.user;
+        const userId = request.user.id;
         const { body } = request.body;
 
-        const newTweet = new Tweet(userName, body);
+        const newTweet = new Tweet({
+            userId: userId,
+            userName: userName,
+            body: body
+        });
+
 
         const result = tweetService.createTweet(newTweet);
 
         response.status(201).json(result);
     }
-    catch (err) { 
+    catch (err) {
         response.status(500).json({
             success: false,
-            err: err
+            err: err.message  || 'Error al guardar el tweet'
         })
     }
 };

@@ -11,6 +11,8 @@ const validateToken = (req, res, next) => {
     }
 
     try {
+        const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+        req.userId = userId;
         const { userName } = jwt.verify(token, process.env.JWT_SECRET);
         req.user = userName;
 

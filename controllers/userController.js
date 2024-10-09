@@ -1,21 +1,83 @@
-const countFollowers = (request, response) => {
-  response.json(9);
+const User = require('../models/userSchema');
+
+
+const addFollower = async (request, response) => {
+  const userIdToFollow = request.params.userId;
+  const currentUserId = request.userId;
+
+  try {
+
+    const userToFollow = await User.findById(userIdToFollow);
+    if (!userToFollow) {
+      return response.status(404).json({ msg: 'User to follow not found' });
+    }
+
+    const currentUser = await User.findById(currentUserId);
+    if (!currentUser) {
+      return response.status(404).json({ msg: 'Current user not found' });
+    }
+
+    
+    await User.findByIdAndUpdate(userIdToFollow, { $addToSet: { followers: currentUserId  } });
+    
+    await User.findByIdAndUpdate(request.userId, { $addToSet: { following: userIdToFollow } });
+
+    response.json({ msg: 'Follower added' });  
+  } catch (error) {
+    response.status(500).json({ msg: 'Something went wrong', error: error.message });  
+  }
+
 };
 
-const addFollower = (request, response) => {
-  response.json({ msg: "Follower added"});
+const removeFollowed = async (request, response) => {
+  const userIdToUnfollow = request.params.userId;
+
+  try {
+    
+    const user = await User.findById(userIdToUnfollow);
+    if (!user) {
+        return response.status(404).json({ msg: 'User not found' });
+    }
+
+    
+    await User.findByIdAndUpdate(userIdToUnfollow, { $pull: { followers: request.userId } });
+    
+    await User.findByIdAndUpdate(request.userId, { $pull: { following: userIdToUnfollow } });
+
+    response.json({ msg: 'Follower removed' });  
+} catch (error) {
+  response.status(500).json({ msg: 'Something went wrong', error: error.message });  
+}
 };
 
-const countFollowed = (request, response) => {
-  response.json(9);
+const countFollowers = async (request, response) => {
+  const userId = request.userId;
+
+  try {
+    const user = await User.findById(userId);
+    response.json({ followersCount: user.followers.length });
+  } catch (error) {
+    response.status(500).json({ msg: 'Something went wrong', error: error.message });
+  }
 };
 
-const removeFollowed = (request, response) => {
-  response.json({ msg: "removed"});
+
+
+const countFollowed = async (request, response) => {
+  const userId = request.userId;
+
+  try {
+    const user = await User.findById(userId);  
+    response.json({ followingCount: user.following.length });  
+  } catch (error) {
+    response.status(500).json({ msg: 'Something went wrong', error: error.message });  
+  }
 };
 
-const removeFollower = (request, response) => {
-  response.json({ msg: "Follower removed"});
+
+
+const removeFollower = async (request, response) => {
+  response.json({ msg: "Follower removed" });
 };
 
 module.exports = {
