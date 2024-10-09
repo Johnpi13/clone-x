@@ -6,7 +6,7 @@ const signUpUser = (request, response) => {
       return;
     }
   
-    res.status(200).json({
+    response.status(200).json({
       msg: "logged in",
     });
 }

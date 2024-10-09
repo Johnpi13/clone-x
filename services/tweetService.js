@@ -1,13 +1,9 @@
-const tweets = require('../mocked_data/tweets')
+const tweets = require('../mocked_data/tweets');
 
 const getTweets = () => {
-    if (tweets){
-        return tweets
-    }
-
-    return [];
-}
+    return tweets;
+};
 
 module.exports = {
     getTweets
-}
+};
