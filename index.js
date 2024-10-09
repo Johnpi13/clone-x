@@ -9,8 +9,13 @@ const signInRouter = require("./routes/signInRoutes");
 const tweetRouter = require("./routes/tweetRouters");
 const userRouter = require("./routes/userRoutes");
 
+const authMiddleware = require('./middlewares/authMiddleware')
+
 app.use(express.json());
 app.use("/", registerRouter, signInRouter);
+
+app.use(authMiddleware.validateToken);
+
 app.use("/:username", tweetRouter);
 app.use("/user", userRouter);
 
