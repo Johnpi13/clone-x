@@ -1,8 +1,7 @@
 const { check, body } = require("express-validator");
 const validate = require('./validation')
 const {
-  getUserByEmail,
-  getUserByUsername,
+  getUser,
 } = require("../services/userService");
 
 const registerValidation = validate([
@@ -11,20 +10,17 @@ const registerValidation = validate([
     { min: 8 }
   ),
 
-  body("email").custom((email, { req }) => {
-    const user = getUserByEmail(req.query.email);
-    if (user) {
-      throw new Error("El email ya está registrado");
+  body("credentials").custom(async (_, {req}) => {
+    let userParams = {
+      email: req.body.email,
+      userName: req.body.userName
     }
-    return true;
-  }),
 
-  body("username").custom((username, { req }) => {
-    console.log(username);
-    const user = getUserByUsername(req.query.username);
+    const user = await getUser(userParams)
     if (user) {
-      throw new Error("El nombre de usuario ya está registrado");
+      throw new Error('usuario ya se encuentra registrado')
     }
+    
     return true;
   }),
 ]);
