@@ -2,20 +2,23 @@ const User = require('../models/userSchema');
 
 
 const addFollower = async (request, response) => {
-  const userIdToFollow = request.params.userId;
-  const currentUserId = request.userId;
 
-  console.log('User to follow:', userIdToFollow);
-  console.log('Current user:', currentUserId);
+  console.log('Request params:', request.params);
+
+  const userNameToFollow = request.params.user;
+  const currentUserName = request.user;
+
+  console.log('User to follow:', userNameToFollow);
+  console.log('Current user:', currentUserName);
 
   try {
 
-    const userToFollow = await User.findById(userIdToFollow);
+    const userToFollow = await User.findOne({ userName: userNameToFollow });
     if (!userToFollow) {
       return response.status(404).json({ msg: 'User to follow not found' });
     }
 
-    const currentUser = await User.findById(currentUserId);
+    const currentUser = await User.findOne({ userName: currentUserName });
     if (!currentUser) {
       return response.status(404).json({ msg: 'Current user not found' });
     }
@@ -23,9 +26,9 @@ const addFollower = async (request, response) => {
     console.log(userToFollow);
 
     
-    await User.findByIdAndUpdate(userIdToFollow, { $addToSet: { followers: currentUserId }}, { writeConcern: { w: "majority" } });
+    await User.findByIdAndUpdate(userToFollow._id, { $addToSet: { followers: currentUserName }}, { new: true });
 
-    await User.findByIdAndUpdate(currentUserId, { $addToSet: { following: userIdToFollow }}, { writeConcern: { w: "majority" } });
+    await User.findByIdAndUpdate(currentUser._id, { $addToSet: { following: userNameToFollow }}, { new: true });
     
     response.json({ msg: 'Follower added' });
 
@@ -37,21 +40,23 @@ const addFollower = async (request, response) => {
 };
 
 const removeFollowed = async (request, response) => {
-  const userIdToUnfollow = request.params.userId;
+  const userNameToUnfollow = request.params.user;
 
   try {
 
-    const user = await User.findById(userIdToUnfollow);
-    if (!user) {
+    const userToUnfollow = await User.findOne({ userName: userNameToUnfollow });
+    if (!userToUnfollow) {
       return response.status(404).json({ msg: 'User not found' });
     }
 
 
-    await User.findByIdAndUpdate(userIdToUnfollow, { $pull: { followers: request.userId } });
+    const currentUser = await User.findOne({ userName: request.user });
 
-    await User.findByIdAndUpdate(request.userId, { $pull: { following: userIdToUnfollow } });
+    
+    await User.findByIdAndUpdate(userToUnfollow._id, { $pull: { followers: currentUser.userName } });
+    await User.findByIdAndUpdate(currentUser._id, { $pull: { following: userNameToUnfollow } });
 
-    response.json({ msg: 'Follower removed' });
+    response.json({ msg: 'Unfollowed successfully' });
   } catch (error) {
     response.status(500).json({ msg: 'Something went wrong', error: error.message });
   }

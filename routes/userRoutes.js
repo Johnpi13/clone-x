@@ -7,9 +7,9 @@ const { countFollowers, addFollower, countFollowed, removeFollowed,removeFollowe
 
 userRouter.get("/followers",validateToken, countFollowers);
 userRouter.get("/followed",validateToken, countFollowed);
-userRouter.post("/follow/:userId",validateToken, addFollower);
-userRouter.delete("/followed/:userId",validateToken, removeFollowed);
-userRouter.delete("/followers/:userId",validateToken, removeFollower);
+userRouter.post("/follow/:user",validateToken, addFollower);
+userRouter.delete("/followed/:user",validateToken, removeFollowed);
+userRouter.delete("/followers/:user",validateToken, removeFollower);
 
 
 
