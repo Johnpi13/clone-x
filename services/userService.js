@@ -30,10 +30,7 @@ const getUser = async (params) => {
 };
 
 const createUser = async (userData) => {
-  const collection = getCollection('users');
-  collection.insertOne(userData)
   try {
-    
     const user = new User(userData); 
     await user.save(); 
 

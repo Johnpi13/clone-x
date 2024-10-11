@@ -22,10 +22,10 @@ const addFollower = async (request, response) => {
     console.log(currentUser);
     console.log(userToFollow);
 
+    
+    await User.findByIdAndUpdate(userIdToFollow, { $addToSet: { followers: currentUserId }}, { writeConcern: { w: "majority" } });
 
-    await User.findByIdAndUpdate(userIdToFollow, { $addToSet: { followers: currentUserId }});
-
-    await User.findByIdAndUpdate(currentUserId, { $addToSet: { following: userIdToFollow }});
+    await User.findByIdAndUpdate(currentUserId, { $addToSet: { following: userIdToFollow }}, { writeConcern: { w: "majority" } });
     
     response.json({ msg: 'Follower added' });
 
