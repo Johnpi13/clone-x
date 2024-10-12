@@ -15,26 +15,24 @@ const listTweets = async (request, response) => {
 
 const publishTweet = async (request, response) => {
     try {
-        console.log("User from request:", request.user);
         const userName = request.user;
-        const userId = request.user.id;
         const { body } = request.body;
 
         const newTweet = new Tweet({
-            userId: userId,
             userName: userName,
             body: body
         });
 
-
-        const result = tweetService.createTweet(newTweet);
-
-        response.status(201).json(result);
+        newTweet.save()
+        response.status(201).json({
+            success: true,
+            newTweet
+        });
     }
     catch (err) {
         response.status(500).json({
             success: false,
-            err: err.message  || 'Error al guardar el tweet'
+            err: err.message || 'Error al guardar el tweet'
         })
     }
 };
