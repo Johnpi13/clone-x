@@ -24,7 +24,6 @@ build/
 coverage/
 
 # Carpetas de configuración
-.env
 .env.local
 .env.test
 .env.production
