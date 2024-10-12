@@ -1,15 +1,16 @@
 const express = require("express")
 const userRouter = express.Router()
-const { validateToken } = require('../middlewares/authMiddleware');
 
-const { countFollowers, addFollower, countFollowed, removeFollowed,removeFollower } = require("../controllers/userController");
+const userController = require("../controllers/userController");
 
-
-userRouter.get("/followers",validateToken, countFollowers);
-userRouter.get("/followed",validateToken, countFollowed);
-userRouter.post("/follow/:user",validateToken, addFollower);
-userRouter.delete("/followed/:user",validateToken, removeFollowed);
-userRouter.delete("/followers/:user",validateToken, removeFollower);
+userRouter.get('/', userController.getRecentTweets)
+userRouter.get("/:userName/followers", userController.countFollowers);
+userRouter.get("/:userName/followed", userController.countFollowed);
+userRouter.get("/:userName/followers/list", userController.getFollowers);
+userRouter.get("/:userName/followed/list", userController.getFollowed);
+userRouter.post("/follow/:user", userController.addFollower);
+userRouter.delete("/followed/:user", userController.removeFollowed);
+userRouter.delete("/followers/:user", userController.removeFollower);
 
 
 

@@ -3,9 +3,9 @@ const tweetService = require('../services/tweetService');
 
 const listTweets = async (request, response) => {
     try {
-        const userId = request.user.id;
+        const userName = request.baseUrl.replace('/', '');
 
-        const tweets = await Tweet.find({ userId: userId });
+        const tweets = await Tweet.find({ userName: userName }).sort({ createdAt: -1 });
 
         response.status(200).json(tweets);
     } catch (err) {

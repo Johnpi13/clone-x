@@ -18,7 +18,7 @@ const signInUser = async (request, response) => {
 
     if (match) {
       const { password, ...payload } = user;
-      const token = await authService.getAuthToken(payload)
+      const token = await authService.getAuthToken(payload._doc)
 
       response.status(200).json({
         msg: "logged in",
