@@ -85,23 +85,21 @@ To start the server, run: npm start
 The API will be accessible at http://localhost:3000.
 
 ## Endpoints
-Authentication
+### Authentication
 -  POST /register: Register a new user with full name, username, email, and password.
 -  POST /login: Log in with the username and password.
   
-## Tweets
+### Tweets
 -  GET /tweets: Get all tweets from users followed by the logged-in user.
 -  POST /tweets: Create a new tweet (max 280 characters).
 -  PUT /tweets/:id: Edit an existing tweet.
 -  DELETE /tweets/:id: Delete a tweet.
   
-## Followers
+### Followers
 -  GET /followers: Get the list of followers of the logged-in user.
 -  GET /following: Get the list of users the logged-in user is following.
 -  POST /follow/:id: Follow another user.
 -  DELETE /unfollow/:id: Unfollow another user.
   
-## User Management
--  GET /users: List all users, paginated.
--  GET /users/:id: View a user's profile and tweets
+
  
