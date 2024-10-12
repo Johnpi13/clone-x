@@ -9,7 +9,7 @@ const registerRouter = require("./routes/registerRoutes");
 const signInRouter = require("./routes/signInRoutes");
 const tweetRouter = require("./routes/tweetRouters");
 const userRouter = require("./routes/userRoutes");
-const { connectBd } = require('./config/db')
+const { connectBd } = require('./config/db');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
@@ -20,6 +20,7 @@ app.use("/", registerRouter, signInRouter);
 
 app.use(authMiddleware.validateToken);
 
+app.use('/', userRouter)
 app.use("/:username", tweetRouter);
 app.use("/user", userRouter);
 app.use("/tweet", tweetRouter);

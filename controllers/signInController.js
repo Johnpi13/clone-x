@@ -11,13 +11,14 @@ const signInUser = async (request, response) => {
 
   try {
     const user = await userService.getUser({ userName: request.body.userName })
+    
     const userPassword = request.body.password;
 
     const match = await bcrypt.compare(userPassword, user.password)
 
     if (match) {
       const { password, ...payload } = user;
-      const token = await authService.getAuthToken(payload)
+      const token = await authService.getAuthToken(payload._doc)
 
       response.status(200).json({
         msg: "logged in",

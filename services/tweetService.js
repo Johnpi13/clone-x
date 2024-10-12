@@ -10,16 +10,6 @@ const getTweets = () => {
     return [];
 }
 
-const createTweet = (tweet) => {
-    const collection = getCollection('tweets');
-    collection.insertOne(tweet)
-
-    return {
-        success: true,
-        tweet
-    }
-}
 module.exports = {
-    getTweets,
-    createTweet
+    getTweets
 };
