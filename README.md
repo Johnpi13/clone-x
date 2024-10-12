@@ -2,7 +2,7 @@
 
 This is the backend API for Clone-X, a Twitter-like application that allows users to create accounts, log in, post tweets, follow users, and manage followers and following lists. The API is built using Express.js and MongoDB for data storage, with JWT used for authentication.
 ## Table of Contents
--  Project Description
+-  [Project Description](#projectdesription)
 -  Features
 -  Technologies Used
 -  Prerequisites
