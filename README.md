@@ -1,8 +1,18 @@
 # **Clone-X API**
 
 This is the backend API for Clone-X, a Twitter-like application that allows users to create accounts, log in, post tweets, follow users, and manage followers and following lists. The API is built using Express.js and MongoDB for data storage, with JWT used for authentication.
+
+## Course Information
+ 
+**Course Name:** Electiva 2  
+**Group Members:** 
+- Jonh Alejandro Tamayo Londoño
+- Deivis Herrera Cortes
+- Juan Pablo Cáceres Arango
+
 ## Table of Contents
 -  [Project Description](#project-description)
+-  [Course Information](#course-information)
 -  [Features](#features)
 -  [Technologies Used](#technologies-used)
 -  [Prerequisites](#prerequisites)
@@ -10,7 +20,7 @@ This is the backend API for Clone-X, a Twitter-like application that allows user
 -  [Environment Variables](#environment-variables)
 -  [Running the API](#running-the-API)
 -  [Endpoints](#endpoints)
--  [License](#license)
+
 ## Project Description
 Clone-X is designed to emulate core functionalities of Twitter. Users can:
 -  Register accounts with name validation.
@@ -63,9 +73,10 @@ Before setting up the API, ensure you have the following installed:
 ## Environment Variables
 Create a .env file in the root directory and include the following environment variables:
 -  DB_CONNECTION_STRING=mongodb+srv://your_username:your_password@cluster.mongodb.net/clone-x?retryWrites=true&w=majority
-   JWT_SECRET=your_jwt_secret
-   SALT_ROUNDS=10
-   APP_PORT=3000
+-  DB_NAME=your_name_proyect    
+-  JWT_SECRET=your_jwt_secret
+-  SALT_ROUNDS=10
+-  APP_PORT=3000
 Replace your_username and your_password with your actual MongoDB credentials.
 Replace your_jwt_secret with a secret string used for JWT authentication.
 
