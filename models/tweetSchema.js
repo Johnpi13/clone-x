@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const tweetSchema = new mongoose.Schema({
     userId: {
-        type: mongoose.Schema.Types.ObjectId, // Cambia esto a String si estás usando el nombre de usuario
+        type: mongoose.Schema.Types.ObjectId, 
         required: true,
-        ref: 'User' // Cambia esto al nombre de tu modelo de usuario si es necesario
+        ref: 'User' 
     },
     userName: {
         type: String,
@@ -16,10 +16,10 @@ const tweetSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now // Para guardar la fecha de creación del tweet
+        default: Date.now 
     }
 });
 
-// Exportar el modelo
+
 const Tweet = mongoose.model('Tweet', tweetSchema);
 module.exports = Tweet;
