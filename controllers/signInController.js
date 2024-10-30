@@ -20,7 +20,11 @@ const signInUser = async (request, response) => {
       const { password, ...payload } = user;
       const token = await authService.getAuthToken(payload._doc)
 
-      response.status(200).json({
+      response.cookie('token', token, {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/'
+      }).status(200).json({
         msg: "logged in",
         authToken: token
       });
