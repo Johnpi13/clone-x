@@ -7,7 +7,10 @@ const listTweets = async (request, response) => {
 
         const tweets = await Tweet.find({ userName: userName }).sort({ createdAt: -1 });
 
-        response.status(200).json(tweets);
+        response.status(200).json({
+            success: true,
+            tweets
+        });
     } catch (err) {
         response.status(500).json({ message: 'Error al obtener los tweets', error: err });
     }
