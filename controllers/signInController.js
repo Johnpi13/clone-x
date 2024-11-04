@@ -11,7 +11,7 @@ const signInUser = async (request, response) => {
 
   try {
     const user = await userService.getUser({ userName: request.body.userName })
-    
+
     const userPassword = request.body.password;
 
     const match = await bcrypt.compare(userPassword, user.password)
@@ -44,6 +44,13 @@ const signInUser = async (request, response) => {
   }
 }
 
+const logout = (req, res) => {
+  res.clearCookie('token', {
+    path: '/'
+  }).status(200).json({ success: true })
+}
+
 module.exports = {
-  signInUser
+  signInUser,
+  logout
 }
