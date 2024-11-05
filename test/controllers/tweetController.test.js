@@ -82,7 +82,7 @@ describe("updateTweet", () => {
 
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      msg: "Tweet updated",
+      msg: "Tweet actualizado",
       tweet: { id: 1, body: "Updated tweet content" },
     });
   });
@@ -113,7 +113,7 @@ describe("deleteTweet", () => {
     deleteTweet(req, res);
 
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({ msg: "Tweet deleted" });
+    expect(res.json).toHaveBeenCalledWith({ msg: "Tweet eliminado" });
   });
 
   test("should return 404 if tweet not found", () => {
@@ -127,6 +127,6 @@ describe("deleteTweet", () => {
     deleteTweet(req, res);
 
     expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.json).toHaveBeenCalledWith({ msg: "Tweet not found" });
+    expect(res.json).toHaveBeenCalledWith({ msg: "Tweet no encontrado" });
   });
 });
