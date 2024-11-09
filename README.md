@@ -32,42 +32,44 @@ Clone-X is designed to emulate core functionalities of Twitter. Users can:
 -  View their own and others' tweets.
 -  Manage followers and users they follow.
 ##Dependencies
-# Express: Fast, unopinionated, minimalist web framework for Node.js.
+### Express: Fast, unopinionated, minimalist web framework for Node.js.
 - npm install express
-# Mongoose: MongoDB object modeling for Node.js.
+### Mongoose: MongoDB object modeling for Node.js.
 - npm install mongoose
-# JWT: JSON Web Token for authentication.
+### JWT: JSON Web Token for authentication.
 - npm install jsonwebtoken
-# Dotenv: Loads environment variables from .env file.
+### Dotenv: Loads environment variables from .env file.
 - npm install dotenv
 
 ##Dev Dependencies
-# Jest: JavaScript Testing Framework.
+### Jest: JavaScript Testing Framework.
 - npm install --save-dev jest
-# Supertest: HTTP assertions made easy.
+### Supertest: HTTP assertions made easy.
 - npm install --save-dev supertest
-# Mockingoose (optional): Mongoose mocking library for unit tests.
+### Mockingoose (optional): Mongoose mocking library for unit tests.
 - npm install --save-dev mockingoose
-# MongoMemoryServer: Provides an in-memory MongoDB instance.
+### MongoMemoryServer: Provides an in-memory MongoDB instance.
 - npm install --save-dev mongodb-memory-server
-# Swagger UI Express: API documentation using Swagger UI.
+### Swagger UI Express: API documentation using Swagger UI.
 - npm install swagger-ui-express
+
+  ## Scripts
+In package.json, you can find these useful scripts:
+
+### Start Server:
+- npm start
+### Run Development Mode:
+- npm run dev
+### Run Tests:
+- npm run tests
+### Coverage Report:
+- npm run coverage
+
+  
 ## Features
 ### User Registration:
 -  Validation for full name, username, email, and password.
 -  Ensures unique usernames and emails.
-
-## Scripts
-In package.json, you can find these useful scripts:
-
-# Start Server:
-- npm start
-# Run Development Mode:
-- npm run dev
-# Run Tests:
-- npm run tests
-# Coverage Report:
-- npm run coverage
   
 ### User Login:
 -  Users can log in with their registered username and password.
