@@ -89,19 +89,19 @@ The API will be accessible at http://localhost:3000.
 ## Endpoints
 ### Authentication
 -  POST /register: Register a new user with full name, username, email, and password.
--  POST /login: Log in with the username and password.
+-  POST /signin: Log in with the username and password.
   
 ### Tweets
--  GET /tweets: Get all tweets from users followed by the logged-in user.
--  POST /tweets: Create a new tweet (max 280 characters).
+-  GET /tweet: Get all tweets from users followed by the logged-in user.
+-  POST /tweet: Create a new tweet (max 280 characters).
 -  PUT /tweets/:id: Edit an existing tweet.
 -  DELETE /tweets/:id: Delete a tweet.
   
 ### Followers
--  GET /followers: Get the list of followers of the logged-in user.
--  GET /following: Get the list of users the logged-in user is following.
--  POST /follow/:id: Follow another user.
--  DELETE /unfollow/:id: Unfollow another user.
+-  GET /user/followers: Get the list of followers of the logged-in user.
+-  GET /user/following: Get the list of users the logged-in user is following.
+-  POST /user/follow/:name: Follow another user.
+-  DELETE /user/followed/:name: Unfollow another user.
 
 ## Testing
 This project includes a test suite to verify the functionality of different features such as user authentication, registration, tweet management and user tracking. These tests are written in Jest, which allows unit and integration tests to be performed on controllers and services.
@@ -132,7 +132,7 @@ The tests are organized into specific modules for each driver and service. The p
 ### Test Execution
 To run all the tests, make sure you have Jest installed and use the following command in the terminal:
 ```bash
-npm run test
+npm run tests
   
 
  
