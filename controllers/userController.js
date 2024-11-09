@@ -9,6 +9,15 @@ const addFollower = async (request, response) => {
   const userNameToFollow = request.params.user;
   const currentUserName = request.user;
 
+  if (userNameToFollow == currentUserName) {
+    response.status(500).json({
+      success: false,
+      msg: "Cannot follow youself"
+    })
+
+    return;
+  }
+
   console.log('User to follow:', userNameToFollow);
   console.log('Current user:', currentUserName);
 
@@ -67,7 +76,7 @@ const getUserInfo = async (request, response) => {
   const userName = request.query.userName;
 
   try {
-    const user = await User.findOne({userName: userName});
+    const user = await User.findOne({ userName: userName });
     response.json({ user });
   } catch (error) {
     response.status(500).json({ msg: 'Something went wrong', error: error.message });
@@ -78,7 +87,7 @@ const countFollowers = async (request, response) => {
   const userName = request.params.userName;
 
   try {
-    const user = await User.findOne({userName: userName});
+    const user = await User.findOne({ userName: userName });
     response.json({ followersCount: user.followers.length });
   } catch (error) {
     response.status(500).json({ msg: 'Something went wrong', error: error.message });
@@ -89,7 +98,7 @@ const countFollowed = async (request, response) => {
   const userName = request.params.userName;
 
   try {
-    const user = await User.findOne({userName: userName});
+    const user = await User.findOne({ userName: userName });
     response.json({ followingCount: user.following.length });
   } catch (error) {
     response.status(500).json({ msg: 'Something went wrong', error: error.message });
@@ -100,7 +109,7 @@ const getFollowers = async (req, res) => {
   const userName = req.params.userName;
 
   try {
-    const user = await User.findOne({userName: userName});
+    const user = await User.findOne({ userName: userName });
     const followers = await User.find({ userName: { $in: user?.followers } })
 
     res.status(200).json({
@@ -117,7 +126,7 @@ const getFollowed = async (req, res) => {
   const userName = req.params.userName;
 
   try {
-    const user = await User.findOne({userName: userName});
+    const user = await User.findOne({ userName: userName });
 
     const followed = await User.find({ userName: { $in: user?.following } });
 
@@ -133,18 +142,18 @@ const getFollowed = async (req, res) => {
 const getRecentTweets = async (req, res) => {
   const userId = req.userId;
 
-  try{
+  try {
     const user = await User.findById(userId);
     const users = await User.find({ userName: { $in: user.following } });
     const userNames = users.concat(user).map(m => m.userName);
-    const tweets = await Tweet.find({userName: {$in: userNames}}).sort({ createdAt: -1 });
+    const tweets = await Tweet.find({ userName: { $in: userNames } }).sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
       tweets
     })
   }
-  catch(err) {
+  catch (err) {
     res.status(500).json({ msg: 'Something went wrong', error: err.message });
   }
 }
