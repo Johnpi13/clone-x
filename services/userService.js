@@ -1,18 +1,47 @@
-const users = require("../mocked_data/users");
-
-const getUserByEmail = (userEmail) => {
-  let userFound = users.find((x) => x.email === userEmail);
-
-  return userFound;
+const User = require('../models/userSchema');
+ 
+const getUser = async (params) => {
+  try {
+    let conditions = []
+    if (!!params.email) {
+      conditions.push({ email: params.email })
+    }
+ 
+    if (!!params.userName) {
+      conditions.push({ userName: params.userName })
+    }
+ 
+    const user = await User.findOne({
+      $or: conditions
+    });
+   
+    return user;
+  }
+  catch (err) {
+    console.log('something went wrong on getUser - userService');
+    console.log(err);
+   
+    return null;
+  }
 };
-
-const getUserByUsername = (username) => {
-  let userFound = users.find((x) => x.name === username);
-
-  return userFound;
+ 
+const createUser = async (userData) => {
+  try {
+    const user = new User(userData);
+    await user.save();
+ 
+    return {
+      success: true,
+      user,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      error: err.message,
+    };
+  }
 };
-
 module.exports = {
-  getUserByEmail,
-  getUserByUsername,
+  getUser,
+  createUser
 };

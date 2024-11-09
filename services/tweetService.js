@@ -1,7 +1,9 @@
-const tweets = require('../mocked_data/tweets')
+const tweets = require('../mocked_data/tweets');
+const { getCollection } = require('../config/db');
+const { text } = require('express');
 
 const getTweets = () => {
-    if (tweets){
+    if (tweets) {
         return tweets
     }
 
@@ -10,4 +12,4 @@ const getTweets = () => {
 
 module.exports = {
     getTweets
-}
+};
