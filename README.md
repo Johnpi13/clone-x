@@ -20,6 +20,8 @@ This is the backend API for Clone-X, a Twitter-like application that allows user
 -  [Environment Variables](#environment-variables)
 -  [Running the API](#running-the-API)
 -  [Endpoints](#endpoints)
+-  [Testing](#testing)
+
 
 ## Project Description
 Clone-X is designed to emulate core functionalities of Twitter. Users can:
