@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { swaggerDocs, swaggerUi } = require('./config/swaggerConfig');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
@@ -12,6 +13,8 @@ const signInRouter = require("./routes/signInRoutes");
 const tweetRouter = require("./routes/tweetRouters");
 const userRouter = require("./routes/userRoutes");
 const { connectBd } = require('./config/db');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 const authMiddleware = require('./middlewares/authMiddleware');
 

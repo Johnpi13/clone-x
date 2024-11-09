@@ -11,10 +11,10 @@ const tweetSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now // Para guardar la fecha de creación del tweet
+        default: Date.now 
     }
 });
 
-// Exportar el modelo
+
 const Tweet = mongoose.model('Tweet', tweetSchema);
 module.exports = Tweet;

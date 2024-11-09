@@ -164,7 +164,8 @@ const getRecentTweets = async (req, res) => {
       tweets
     })
   }
-  catch (err) {
+  catch(err) {
+    console.log('Error in getRecentTweets:', err);
     res.status(500).json({ msg: 'Something went wrong', error: err.message });
   }
 }
