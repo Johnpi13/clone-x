@@ -63,6 +63,17 @@ const removeFollowed = async (request, response) => {
   }
 };
 
+const getUserInfo = async (request, response) => {
+  const userName = request.query.userName;
+
+  try {
+    const user = await User.findOne({userName: userName});
+    response.json({ user });
+  } catch (error) {
+    response.status(500).json({ msg: 'Something went wrong', error: error.message });
+  }
+}
+
 const countFollowers = async (request, response) => {
   const userName = request.params.userName;
 
@@ -150,5 +161,6 @@ module.exports = {
   removeFollower,
   getFollowers,
   getFollowed,
-  getRecentTweets
+  getRecentTweets,
+  getUserInfo
 };

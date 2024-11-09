@@ -4,6 +4,7 @@ const userRouter = express.Router()
 const userController = require("../controllers/userController");
 
 userRouter.get('/', userController.getRecentTweets)
+userRouter.get('/userinfo', userController.getUserInfo)
 userRouter.get("/:userName/followers", userController.countFollowers);
 userRouter.get("/:userName/followed", userController.countFollowed);
 userRouter.get("/:userName/followers/list", userController.getFollowers);
