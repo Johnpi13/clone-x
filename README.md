@@ -31,7 +31,9 @@ Clone-X is designed to emulate core functionalities of Twitter. Users can:
 -  Follow and unfollow other users.
 -  View their own and others' tweets.
 -  Manage followers and users they follow.
-##Dependencies
+  
+
+   ## Dependencies
 ### Express: Fast, unopinionated, minimalist web framework for Node.js.
 - npm install express
 ### Mongoose: MongoDB object modeling for Node.js.
@@ -41,7 +43,8 @@ Clone-X is designed to emulate core functionalities of Twitter. Users can:
 ### Dotenv: Loads environment variables from .env file.
 - npm install dotenv
 
-##Dev Dependencies
+
+  ## Dev Dependencies
 ### Jest: JavaScript Testing Framework.
 - npm install --save-dev jest
 ### Supertest: HTTP assertions made easy.
