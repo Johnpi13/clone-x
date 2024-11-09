@@ -35,6 +35,13 @@ const addFollower = async (request, response) => {
     console.log(currentUser);
     console.log(userToFollow);
 
+    if (currentUser.following.includes(userNameToFollow)) {
+      response.status(500).json({
+        msg: "Already following this user"
+      })
+
+      return;
+    }
 
     await User.findByIdAndUpdate(userToFollow._id, { $addToSet: { followers: currentUserName } }, { new: true });
 
@@ -74,10 +81,14 @@ const removeFollowed = async (request, response) => {
 
 const getUserInfo = async (request, response) => {
   const userName = request.query.userName;
+  const loggedUsername = request.user;
 
   try {
     const user = await User.findOne({ userName: userName });
-    response.json({ user });
+    const loggedUser = await User.findOne({ userName: loggedUsername });
+
+    const followingUser = loggedUser.following.includes(userName);
+    response.json({ user, followingUser });
   } catch (error) {
     response.status(500).json({ msg: 'Something went wrong', error: error.message });
   }
