@@ -24,10 +24,12 @@ describe("User Controller", () => {
         .mockResolvedValueOnce({
           _id: "userToFollowId",
           userName: "userToFollow",
+          following:[],
         }) 
         .mockResolvedValueOnce({
           _id: "currentUserId",
           userName: "currentUser",
+          following:[],
         }); 
 
       User.findByIdAndUpdate.mockResolvedValueOnce({});
