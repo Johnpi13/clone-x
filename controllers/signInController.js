@@ -26,6 +26,7 @@ const signInUser = async (request, response) => {
         path: '/'
       }).status(200).json({
         msg: "logged in",
+        username: payload._doc.userName,
         authToken: token
       });
     } else {
