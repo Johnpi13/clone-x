@@ -22,6 +22,7 @@ describe("sigInController.js", () => {
     res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
+      cookie: jest.fn().mockReturnThis()
     };
     jest.clearAllMocks();
   });
@@ -51,12 +52,12 @@ describe("sigInController.js", () => {
           user.password
         );
         const { password, ...payload } = user;
-        
 
         expect(authService.getAuthToken).toHaveBeenCalledWith(payload._doc);
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith({
           msg: "logged in",
+          username: "testUser",
           authToken: "fakeAuthToken",
         });
       });

@@ -31,7 +31,7 @@ describe("tweetController.js", () => {
 
       expect(Tweet.find).toHaveBeenCalledWith({ userName: "tweets" });
       expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json).toHaveBeenCalledWith(mockTweets);
+      expect(res.json).toHaveBeenCalledWith({success:true, tweets: mockTweets});
     });
   });
 });
