@@ -100,6 +100,37 @@ The API will be accessible at http://localhost:3000.
 -  GET /following: Get the list of users the logged-in user is following.
 -  POST /follow/:id: Follow another user.
 -  DELETE /unfollow/:id: Unfollow another user.
+
+## Testing
+This project includes a test suite to verify the functionality of different features such as user authentication, registration, tweet management and user tracking. These tests are written in Jest, which allows unit and integration tests to be performed on controllers and services.
+
+### Test Structure
+The tests are organized into specific modules for each driver and service. The purpose of each of the included tests is described below:
+- **`registerController.js`**:
+  - Verifies that a user can be registered correctly.
+  - Includes tests for scenarios with valid and failed data in the registry.
+- **`signInController.js`**:
+  - Validate the login flow.
+  - Includes tests for successful authentication, invalid credentials, and user not found.
+- **`tweetController.js`**:
+  - Validates tweet CRUD operations: list, post, update and delete.
+  - Additional tests to verify the system response when no tweets are found.
+- **`userController.js`**:
+  - Includes tests for the functionality of adding and removing followers.
+  - Check follower count and get recent tweets from followed users.
+- **`authService.js`**:
+  - Verifies the generation of JWT tokens for user authentication.
+- **`tweetService.js`**:
+  - Simulates the response by obtaining a list of tweets.
+  - Check behavior when no tweet data is available.
+- **`userService.js`**:
+  - Tests to get an existing user (by `userName` or `email`) and handle database error cases.
+  - Verification of new user creation and error handling.
+
+### Test Execution
+To run all the tests, make sure you have Jest installed and use the following command in the terminal:
+```bash
+npm run test
   
 
  
